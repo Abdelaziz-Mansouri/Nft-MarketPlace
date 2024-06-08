@@ -2,7 +2,11 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Welcome from "./screens/Welcome"
+import Home from "./screens/Home"
+import NFTDetails from "./screens/NFTDetails"
 const App = () => {
     const [fontLoaded] = useFonts(
         {
@@ -14,11 +18,22 @@ const App = () => {
         }
     )
     if(!fontLoaded) return null ;
+    const Stack = createNativeStackNavigator();
+
     return (
-        <View style={styles.container}>
+        <>
             <StatusBar style='light' animated={true}/>
-        <Text style={styles.text}>Hello, React Native!</Text>
-        </View>
+            <NavigationContainer>
+              <Stack.Navigator initialRouteName='Welcome' screenOptions={{
+                headerShown : false,
+              }}>
+                <Stack.Screen name="Welcome" component={Welcome}/>
+                <Stack.Screen name="Home" component={Home}/>
+                <Stack.Screen name="NFT-details" component={NFTDetails}/>
+              </Stack.Navigator>
+            </NavigationContainer>
+        
+        </>
     );
 };
 
