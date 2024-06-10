@@ -1,31 +1,38 @@
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import {COLORS , SIZES , FONTS, DATA} from "../constants";
 import NFTImage from './NFTImage';
 import NFTAvatars from './NFTAvatars';
 import NFTTitle from './NFTTitle';
 import NFTInfo from './NFTInfo';
+import { useNavigation } from '@react-navigation/native';
 
 const NFTCard = ({NFTData}) => {
+  const navigation = useNavigation();
+  const pressHandler =() => {
+    navigation.navigate('NFT-details' , {NFTData});
+  } 
   return (
-    <SafeAreaView style={styles.container}>
-      <TouchableOpacity >
-        <NFTImage image={NFTData.image} imageStyles={styles.imageStyles}/>
-      </TouchableOpacity>
-      <View style={styles.cardTop}>
-        <NFTAvatars avatars={NFTData.avatars}/>
-      </View>
-      <View style={styles.cardBottom}>
-        <NFTTitle _name={NFTData.name} creator={NFTData.creator} date={NFTData.date}/>
-        <View style={{marginTop : SIZES.small + 5}}>
-            <NFTInfo 
-            comments={NFTData.comments}
-            views={NFTData.views}
-            price={NFTData.price}
-            love/>
+    <TouchableWithoutFeedback>
+      <SafeAreaView style={styles.container}>
+        <TouchableOpacity onPress={pressHandler}>
+          <NFTImage image={NFTData.image} imageStyles={styles.imageStyles}/>
+        </TouchableOpacity>
+        <View style={styles.cardTop}>
+          <NFTAvatars avatars={NFTData.avatars}/>
         </View>
-      </View>
-    </SafeAreaView>
+        <View style={styles.cardBottom}>
+          <NFTTitle _name={NFTData.name} creator={NFTData.creator} date={NFTData.date}/>
+          <View style={{marginTop : SIZES.small + 5}}>
+              <NFTInfo 
+              comments={NFTData.comments}
+              views={NFTData.views}
+              price={NFTData.price}
+              love/>
+          </View>
+        </View>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   )
 }
 

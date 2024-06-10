@@ -1,10 +1,25 @@
-import { View, Text, StyleSheet , Image} from 'react-native'
+import { View, Text, StyleSheet , Image , StatusBar} from 'react-native'
 import React from 'react'
+import Button from './Button'
+import { COLORS } from '../constants'
+import { AntDesign , Feather } from '@expo/vector-icons'
 
-const NFTImage = ({image , imageStyles}) => {
+
+const NFTImage = ({image , imageStyles , love , arrow , pressHandler}) => {
+
+
   return (
     <View style={styles.container}>
-      <Image source={image} style={imageStyles}/>
+      <Image source={image} style={imageStyles} resizeMode='cover'/>
+      {love && (
+        <Button stylesButton={[styles.button , styles.heartButton]}
+        Icon={<AntDesign name='heart' size={20} color={COLORS.second}/>}/>
+      )}
+      {arrow && (
+        <Button stylesButton={[styles.button , styles.arrowButton]}
+        Icon={<Feather name='arrow-left' size={20} color={COLORS.second}/>}
+        pressHandler={pressHandler && pressHandler}/>
+      )}
     </View>
   )
 }
@@ -13,6 +28,20 @@ export default NFTImage
 const styles = StyleSheet.create({
     container : {
         width : "100%",
-        position : "relative"
+        position : "relative",
+    },
+    button : {
+      position : "absolute",
+      top : StatusBar.currentHeight + 10 ,
+      backgroundColor : COLORS.white ,
+      padding : 10 ,
+      borderRadius : 40,
+    },
+    heartButton :{
+      right : 10 ,
+    },
+    arrowButton :{
+      left : 10 ,
     }
+
 })

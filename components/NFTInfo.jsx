@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet} from 'react-native'
 import React from 'react'
 import {COLORS , SIZES , FONTS} from "../constants";
-import { Button } from './Button';
+import Button  from './Button';
 import { Feather, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 const NFTInfo = ({comments , views , price , love }) => {
   return (
