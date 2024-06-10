@@ -1,14 +1,31 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet} from 'react-native'
 import React from 'react'
 import {COLORS , SIZES , FONTS} from "../constants";
-
-const NFTInfo = ({comments , views, price, love}) => {
+import { Button } from './Button';
+import { Feather, MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+const NFTInfo = ({comments , views , price , love }) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
+        <Feather name="eye" size={20} color={COLORS.white}/>
         <Text style={styles.text}>{views}</Text>
-        <Text>icon</Text>
       </View>
+      <View style={styles.wrapper}>
+        <MaterialCommunityIcons name="comment-text-outline" size={17} color={COLORS.white}/>
+        <Text style={styles.text}>{comments}</Text>
+      </View>
+      <View style={styles.wrapper}>   
+        <MaterialCommunityIcons name="ethereum" size={20} color={COLORS.white}/>
+        <Text style={styles.text}>{price}</Text>
+      </View>
+      {love && (
+        <View>
+          <Button 
+          Icon={<AntDesign name="heart" size={18} color={COLORS.second}/>}
+          stylesButton={styles.buttonHeart} 
+          />
+        </View>)
+      }
     </View>
   )
 }
@@ -35,5 +52,12 @@ const styles = StyleSheet.create({
         fontFamily : FONTS.medium,
         fontSize : SIZES.medium,
         color : COLORS.white
+    },
+    buttonHeart :{
+      backgroundColor : COLORS.bg,
+      padding: 5,
+      borderRadius : 20,
+      borderWidth : 1,
+      borderColor : COLORS.second
     }
 })
